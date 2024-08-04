@@ -39,9 +39,11 @@ function App() {
     const input1 = document.getElementById("view");
     const input2 = document.getElementById("list");
     const watermark = document.getElementById("water1");
+    const page = document.getElementById("home");
     watermark.style.display = "block";
     input1.style.height = "100%";
-    input2.style.height = "100%"; // Ensure the full height is set before capturing
+    input2.style.height = "100%";
+    page.style.display = "block"; // Ensure the full height is set before capturing
     const originalHeight = input1.scrollHeight;
     console.log(input1.clientWidth);
     html2canvas(input, {
@@ -53,13 +55,13 @@ function App() {
         const pdf = new jsPDF("p", "mm", "a4");
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         pdf.save(`${name}_${month}_expense.pdf`);
         showElements();
         input1.style.height = "calc(100% - 100px)";
         input2.style.height = "fit-content";
-        watermark.style.display = "none"; // Specify the name of the PDF
+        watermark.style.display = "none";
+        page.style.display = "none"; // Specify the name of the PDF
       })
       .catch((error) => {
         console.error("Error generating PDF:", error);
@@ -67,16 +69,17 @@ function App() {
         input1.style.height = "calc(100% - 100px)";
         input2.style.height = "fit-content";
         watermark.style.display = "none";
+        page.style.display = "none";
       });
   };
   return (
     <GlobalProvider>
-      <div style={{ height: "100%" }} id="content">
+      <div style={{ height: "100%", width: "100%" }} id="content">
         <Header />
         <div style={{ overflow: "scroll" }} className="app-container" id="view">
           <HomePage onDataReceived={handleDataFromChild} />
           <div className="watermark-container" id="water1"></div>
-          <div className="container">
+          <div className="container" id="con">
             <Balance />
             <IncomeExpenses />
             <TransactionList />

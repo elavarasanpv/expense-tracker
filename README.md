@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Live demo of this app
+
+This project can be seen in [Expense Tracker](https://elavarasanpv.github.io/expense-tracker/)
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
